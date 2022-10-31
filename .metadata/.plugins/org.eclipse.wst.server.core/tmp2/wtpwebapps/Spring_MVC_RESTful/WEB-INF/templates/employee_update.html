@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>UpdateEmp</title>
+</head>
+<body>
+	<div align="center">
+		<form th:action="@{/employee}" method="post">
+			<input type="hidden" name="_method" value="put"> 
+			<input type="hidden" name="id" th:value="${emp.id}">
+			<table>
+				<tr>
+					<th colspan="2">Employee-Update</th>
+				</tr>
+				<tr>
+					<td>Last-Name:</td>
+					<td><input type="text" name="lastName" th:value="${emp.lastName}"></td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td><input type="text" name="email" th:value="${emp.email}"></td>
+				</tr>
+				<tr>
+					<td>Gender:</td>
+					<td>
+						<input type="radio" id="M" name="gender" value="1" th:field="${emp.gender}">
+						<label for="M">男</label>
+						<input type="radio" id="F" name="gender" value="0" th:field="${emp.gender}">
+						<label for="F">女</label>
+						<input type="radio" id="E" name="gender" value="2" th:field="${emp.gender}">
+						<label for="E">保密</label>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit" value="更改員工訊息"></td>
+				</tr>
+			</table>
+			
+		</form>
+	</div>
+</body>
+<style>
+	th, td{
+		font-weight: bolder;
+		text-align: center;
+	}
+	th {
+		font-size: 16pt;
+	}
+	td {
+		font-size: 14pt;
+	}
+</style>
+</html>

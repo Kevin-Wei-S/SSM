@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	
+	<!-- 
+		MyBatis核心配置文件中的標籤
+		configuration之屬性之指定順序配置
+		properties
+		settings
+		typeAliases
+		typeHandlers
+		objectFactory
+		objectWrapperFactory
+		reflectorFactory
+		plugins
+		environments
+		databaseIdProvider
+		mappers
+	 -->
+
+	<!-- 引入properties文件, 此後就可以在當前文件中使用${key}的方式來訪問value -->
+	<properties resource="jdbc.properties" />
+	
+	<!-- 類型別名標籤 -->
+	<typeAliases>
+		<!-- <typeAlias type="com.kwei.mybatis.pojo.User" alias="QAZ" /> -->
+		<!-- <typeAlias type="com.kwei.mybatis.pojo.User" /> -->
+		<!-- 通過包來設置類型別名, 指定包下所有的類型將全部擁有默認別名(即類名且不區分大小寫) -->
+		<package name="com.kwei.mybatis.pojo"/>
+	</typeAliases>
+
+	<!-- 
+		environments: 配置連接數據庫環境
+		屬性:
+		default: 設置默認使用的環境的id
+	 -->
+	<!-- 配置連接數據庫的環境 -->
+	<environments default="development">
+	
+		<!--
+			 environment: 設置一個具體的連接數據庫的環境
+			 	屬性:
+			 		id: 設置環境的唯一標識, 不能重複.
+		 -->
+		<environment id="development">
+			<!-- 
+				transactionManager: 設置事務管理器 
+				屬性:
+					type: 設置事務管理的方式
+					type = "JDBC / MANAGED"
+					JDBC: 表示使用JDBC中原生的事務管理方式
+					MANAGED: 被管理, 例如Spring
+			-->
+			<transactionManager type="JDBC" />
+			<!-- 數據源 -->
+			<!-- 
+				dataSource: 設置數據源
+				屬性:
+					type: 設置數據源的類型
+					type = "POOLED / UNPOOLED / JNDI"
+					POOLED: 表示使用數據庫連接池 
+					UNPOOLED: 表示不使用數據庫連接池(每次都是重新創建連接)
+					JNDI: 表示使用上下文中的數據源
+			 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}"/>
+			</dataSource>
+		</environment>
+		
+		<environment id="test">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost:3306/ssm?serverTimezone=UTC" />
+				<property name="username" value="root" />
+				<property name="password" value="K0932851767"/>
+			</dataSource>
+		</environment>
+		
+	</environments>
+	
+	
+	<!-- 引入MyBatis的映射文件 -->
+	<mappers>
+		<!-- <mapper resource="mappers/UserMapper.xml" /> -->
+		<!-- 
+			以包的方式來引入映射文件, 但是必須滿足兩個條件:
+			1. mapper接口與映射文件所在的包必須一致
+			2. mapper接口的名字和映射文件的名字必須一致
+			
+		 -->
+		<package name="com.kwei.mybatis.mapper"/>
+	</mappers>
+	
+</configuration>

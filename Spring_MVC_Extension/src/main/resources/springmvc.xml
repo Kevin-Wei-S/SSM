@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	   					   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd ">
+	  
+	  <context:component-scan base-package="com.kwei.spring.mvc"></context:component-scan>
+	  
+	  <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+	  	<property name="order" value="1"></property>
+	  	<property name="characterEncoding" value="UTF-8"></property>
+	  	<property name="templateEngine">
+	  		<bean class="org.thymeleaf.spring5.SpringTemplateEngine">
+	  			<property name="templateResolver">
+	  				<bean class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+	  					<property name="prefix" value="/WEB-INF/templates/"></property>
+	  					<property name="suffix" value=".html"></property>
+	  					<property name="templateMode" value="HTML5"></property>
+	  					<property name="characterEncoding" value="UTF-8"></property>
+	  				</bean>
+	  			</property>
+	  		</bean>
+	  	</property>
+	  </bean>
+	  
+	  <mvc:default-servlet-handler />
+	  
+	  <mvc:annotation-driven />
+	  
+	  <mvc:view-controller path="/" view-name="index"></mvc:view-controller>
+	  
+	  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+	  
+	  <!-- <mvc:interceptors>
+	  	bean及ref標籤所配置的攔截器, 默認對DispatcherServlet處理的所有請求進行攔截 
+	  	<bean class="com.kwei.spring.mvc.interceptor.FirstInterceptor" />
+	  	<ref bean="firstInterceptor" />
+	  	<ref bean="secondInterceptor" />
+	  	配置需要攔截的請求路徑, /**表示所有請求路徑
+	  	<mvc:interceptor>
+	  		<mvc:mapping path="/**"/>
+	  		<mvc:exclude-mapping path="/abc" />
+	  		配置攔截器
+	  		<ref bean="firstInterceptor" />
+	  	</mvc:interceptor>
+	  </mvc:interceptors> -->
+	  
+	  <!-- 異常解析器 -->
+	  <!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	  		<property name="exceptionMappings">
+	  			<props>
+	  				key:設置將處理的異常; value:處理異常跳轉的邏輯視圖
+	  				<prop key="java.lang.ArithmeticException">error</prop>
+	  			</props>
+	  		</property>
+	  		設置共享在請求域中的異常訊息的屬性名
+	  		<property name="exceptionAttribute" value="ex"></property>
+	  </bean> -->
+	   					   
+</beans>	   					   

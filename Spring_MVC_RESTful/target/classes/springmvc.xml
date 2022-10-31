@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	   					   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd ">
+	   
+	   <context:component-scan base-package="com.kwei.spring.mvc"></context:component-scan>
+	   
+	   <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+	   		<property name="order" value="1"></property>
+	   		<property name="characterEncoding" value="UTF-8"></property>
+	   		<property name="templateEngine">
+	   			<bean class="org.thymeleaf.spring5.SpringTemplateEngine">
+	   				<property name="templateResolver">
+	   					<bean class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+	   						<property name="prefix" value="/WEB-INF/templates/"></property>
+	   						<property name="suffix" value=".html"></property>
+	   						<property name="templateMode" value="HTML5"></property>
+	   						<property name="characterEncoding" value="UTF-8"></property>
+	   					</bean>
+	   				</property>
+	   			</bean>
+	   		</property>
+	   </bean>
+	   
+	   <!-- 配置默認的Servlet處理靜態資源 -->
+	   <mvc:default-servlet-handler />
+	   
+	   <!-- 開啟mvc註解驅動 -->
+	   <mvc:annotation-driven />
+	   
+	   <!-- 配置視圖控制器 -->
+	   <mvc:view-controller path="/" view-name="index"></mvc:view-controller>
+	   <!-- 員工添加跳轉頁面(僅跳轉故不寫在Controller) 有Bug -->
+	   <!--  <mvc:view-controller path="/employee/add" view-name="employee_add"></mvc:view-controller> -->
+	   
+</beans>

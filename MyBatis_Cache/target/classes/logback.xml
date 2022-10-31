@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration debug="true">
+	<!-- 指定日誌輸出的位置 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<!-- 日誌輸出格式 -->
+			<!-- 按照順序分別是: 時間、日誌級別、線程名稱、打印日誌的類、日誌主體內容、換行 -->
+			<pattern>
+				[%d{HH:mm:ss.SSS}][%-5level][%thread][%logger][%msg]%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- 設置全局日誌級別. 日誌級別按順序分別是: DEBUG、INFO、WARN、ERROR -->
+	<!-- 指定任何一個日誌級別都只打印當前級別和後面級別的日誌 -->
+	<root level="DEBUG">
+		<!-- 指定打印日誌的appender, 這裡通過"STDOUT"引用了前面配置的appender -->
+		<appender-ref ref="STDOUT" />
+	</root>
+	
+	<!-- 根據特殊需求指定局部日誌級別 -->
+	<logger name="com.kwei.mybatis.mapper" level="DEBUG" />
+
+</configuration>

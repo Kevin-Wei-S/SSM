@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>RESTful-Index</title>
+</head>
+<body>
+	<h1 align="center">RESTful-Index</h1>
+	<hr>
+	<h3 align="center"><a th:href="@{/user}">查詢所有的用戶訊息</a></h3>
+	<h3 align="center"><a th:href="@{/user/1001}">查詢id為1001的用戶訊息</a></h3>
+	<div align="center">
+		<form th:action="@{/user}" method="post">
+			<input type="submit" value="新增用戶訊息">
+		</form>
+	</div>
+	<div align="center">
+		<form th:action="@{/user}" method="post">
+			<input type="hidden" name="_method" value="put">
+			<input type="submit" value="修改用戶訊息">
+		</form>
+	</div>
+	<div align="center">
+		<form th:action="@{/user/1001}" method="post">
+			<input type="hidden" name="_method" value="delete">
+			<input type="submit" value="刪除id為1001的用戶訊息">
+		</form>
+	</div>
+	<hr>
+	<div align="center">
+		<h2>RESTful - 員工系統</h2>
+		<a th:href="@{/employee}">Employee - 員工一覽表</a> <br>
+	</div>
+	
+</body>
+</html>

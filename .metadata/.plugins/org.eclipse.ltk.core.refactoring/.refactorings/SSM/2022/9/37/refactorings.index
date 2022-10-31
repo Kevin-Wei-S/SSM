@@ -1,0 +1,10 @@
+1662549342221	Delete element
+1662602056855	Copy package
+1662602062653	Delete element
+1662602100412	Delete element
+1662604089551	Rename resource 'mybatis-config.xml'
+1662605933395	Rename package 'com.kwei.ssm.mybatis.mapper'
+1662606257280	Rename resource 'mapper'
+1662606361386	Delete element
+1662617895095	Move 'EmployeeMapper.xml' to 'mapper'
+1662617899519	Delete element

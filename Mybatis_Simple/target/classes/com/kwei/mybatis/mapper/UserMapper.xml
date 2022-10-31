@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kwei.mybatis.mapper.UserMapper">
+
+	<!-- 
+		mapper接口和映射文件要保證兩個一致:
+			1. mapper接口的全類名和映射文件的namespace一致
+			2. mapper接口的抽象方法名與映射文件的CRUD的標籤內屬性id值一致, 
+			   標籤本身也必須一致.
+	 -->
+
+	<!-- int insertUser(); -->
+	<insert id="insertUser">
+		INSERT INTO t_user values(null, "ssUtil", "123", 1, " ", "ssUtil@gmail.com")
+	</insert>
+	
+	<!-- void updateUser() -->
+	<update id="updateUser">
+		UPDATE t_user SET username="Update", password="secret" WHERE id = 14;  
+	</update>
+	
+	<!-- int deleteUser() -->
+	<delete id="deleteUser">
+		DELETE FROM t_user WHERE id = 26
+	</delete>
+	
+	<!-- User getUserById(); -->
+	<!-- 
+		resultType: 設置結果類型, 即查詢的數據要轉換為Java的類型
+		resultMap: 自定義映射, 處理多對一或一對多的映射關係.
+	 -->
+	<select id="getUserById" resultType="com.kwei.mybatis.pojo.User">
+		SELECT * FROM t_user WHERE id = 25;
+	</select>
+	
+	<!-- List<User> getAllUser() -->
+	<select id="getAllUser" resultType="User">
+		SELECT * FROM t_user
+	</select>
+	
+
+</mapper>

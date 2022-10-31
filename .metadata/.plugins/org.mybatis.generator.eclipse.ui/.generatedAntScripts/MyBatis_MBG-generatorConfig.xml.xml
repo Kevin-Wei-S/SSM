@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<project default="generate">
+  <target name="generate">
+    <mybatis.generate configfile="D:\workspace\SSM\MyBatis_MBG\src\main\resources\generatorConfig.xml" />
+  </target>
+</project>

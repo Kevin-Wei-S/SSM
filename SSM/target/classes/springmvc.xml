@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	   					   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+	<!-- 掃描控制層組件 -->
+	<context:component-scan
+		base-package="com.kwei.ssm.controller"></context:component-scan>
+
+	<!-- 配置視圖解析器 -->
+	<bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+		<property name="order" value="1"></property>
+		<property name="characterEncoding" value="UTF-8"></property>
+		<property name="templateEngine">
+			<bean class="org.thymeleaf.spring5.SpringTemplateEngine">
+				<property name="templateResolver">
+					<bean
+						class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+						<!-- 視圖前綴 -->
+						<property name="prefix" value="/WEB-INF/templates/"></property>
+						<!-- 視圖後綴 -->
+						<property name="suffix" value=".html"></property>
+						<property name="templateMode" value="HTML5"></property>
+						<property name="characterEncoding" value="UTF-8"></property>
+					</bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- 開啟mvc的註解驅動 -->
+	<mvc:annotation-driven />
+	<!-- 配置默認的Servlet來處理靜態資源 -->
+	<mvc:default-servlet-handler />
+	<!-- 配置視圖控制器(Index) -->
+	<mvc:view-controller path="/" view-name="index"></mvc:view-controller>
+	<!-- 配置文件上傳解析器 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+	
+	<!-- 攔截器 -->
+	<!-- <bean id="firstInterceptor" class="com.kwei.ssm.interceptor.FirstInterceptor"></bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"></mvc:mapping>
+			<mvc:exclude-mapping path="/wsx"></mvc:exclude-mapping>
+			<ref bean="firstInterceptor"></ref>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
+	<!-- 異常解析器 -->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.ArithmeticException">error</prop>
+			</props>
+		</property>
+		<property name="exceptionAttribute" value="ex"></property>
+	</bean>
+
+
+</beans>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<temp-directories>
+  <temp-directory age="0" key="Spring_MVC_Demo" path="tmp1" recycle="false"/>
+  <temp-directory age="0" key="Spring_MVC_Extension" path="tmp4" recycle="false"/>
+  <temp-directory age="0" key="Spring_MVC_RESTful" path="tmp2" recycle="false"/>
+  <temp-directory age="0" key="Spring_MVC_Annotation" path="tmp5" recycle="false"/>
+  <temp-directory age="0" key="SSM" path="tmp7" recycle="false"/>
+  <temp-directory age="0" key="Spring_MVC_Ajax" path="tmp3" recycle="false"/>
+  <temp-directory age="0" key="Spring_Integration_Listener" path="tmp6" recycle="false"/>
+</temp-directories>

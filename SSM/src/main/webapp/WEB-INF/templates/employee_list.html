@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Employee-List</title>
+</head>
+<body>
+	<div id="app">
+		<div align="center">
+			<h1>Employee-List</h1>
+		</div>
+		<hr>
+		<div align="center">
+			<table border="1">
+				<tr>
+					<th>No</th>
+					<th>Name</th>
+					<th>Age</th>
+					<th>Gender</th>
+					<th>Email</th>
+					<th><a th:href="@{/employee/page/add}">Add</a></th>
+				</tr>
+				<tr th:each="employee,status : ${pageInfo.list}">
+					<td th:text="${(pageInfo.pageNum - 1) * pageInfo.pageSize + status.count}"></td>
+					<td th:text="${employee.empName}"></td>
+					<td th:text="${employee.age}"></td>
+					<td th:text="${employee.gender}"></td>
+					<td th:text="${employee.email}"></td>
+					<td>
+						<a th:href="@{'/employee/page/update/' + ${employee.empId} + '/' + ${pageInfo.pageNum}}">Update</a>
+						<a @click="deleteEmployee" th:empId="${employee.empId}" th:href="@{'/employee/delete/' + ${employee.empId} }">Delete</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<hr>
+		<div id="pageContainer" align="center">
+			<a th:if="${pageInfo.hasPreviousPage}" class="pageClazz" th:href="@{/employee/page/1}">首頁</a> 
+			<a th:if="${pageInfo.hasPreviousPage}" class="pageClazz" th:href="@{'/employee/page/' + ${pageInfo.prePage}}">上一頁</a>
+			<span th:each="pageNum : ${pageInfo.navigatepageNums}">
+				<a th:if="${pageNum != pageInfo.pageNum}" th:href="@{'/employee/page/' + ${pageNum}}" th:text="${pageNum}" class="pageClazz"></a>
+				<span th:if="${pageNum == pageInfo.pageNum}" th:text="${'[' + pageNum + ']'}"  style="color:red;" class="pageClazz"></span>
+			</span>
+ 			<a th:if="${pageInfo.hasNextPage}" class="pageClazz" th:href="@{'/employee/page/' + ${pageInfo.nextPage}}">下一頁</a>
+			<a th:if="${pageInfo.hasNextPage}" class="pageClazz" th:href="@{'/employee/page/' + ${pageInfo.pages}}">末頁</a>
+			
+			<!-- <span th:switch="${pageInfo.pageNum}"> <span th:case="1"></span>
+				<span th:case="*"> <a class="pageClazz"
+					th:href="@{/employee/page/1}">首頁</a> <a class="pageClazz"
+					th:href="@{'/employee/page/' + ${pageInfo.prePage}}">上一頁</a>
+			</span>
+			</span> <span th:switch="${pageInfo.pageNum}"
+				th:each="pageNum : ${pageInfo.navigatepageNums}"> <span
+				class="pageClazz" th:case="${pageNum}" th:text="${pageNum}"></span>
+				<a class="pageClazz" th:case="*"
+				th:href="@{'/employee/page/' + ${pageNum}}" th:text="${pageNum}"></a>
+			</span> <span th:switch="${pageInfo.pageNum}"> <span
+				th:case="${pageInfo.pages}"></span> <span th:case="*"> <a
+					class="pageClazz"
+					th:href="@{'/employee/page/' + ${pageInfo.nextPage}}">下一頁</a> <a
+					class="pageClazz"
+					th:href="@{'/employee/page/' + ${pageInfo.pages}}">末頁</a>
+			</span>
+			</span> -->
+		</div>
+		<form method="post">
+			<input type="hidden" name="_method" value="delete">
+			<input type="hidden" name="pageNum" th:value="${pageInfo.pageNum}">
+		</form>
+	</div>
+</body>
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+<script type="text/javascript">
+	var vue = new Vue({
+		el : "#app",
+		methods: {
+			deleteEmployee(){
+				var form = document.getElementsByTagName("form")[0];
+				form.action = event.target.href;
+				if(confirm("確定要刪除id: " + event.target.getAttribute("empId") + "的員工資訊?")){
+					form.submit();
+				} 
+				event.preventDefault();
+			}
+		}
+	})
+</script>
+<style>
+th, td {
+	font-size: 15pt;
+	font-weight: bolder;
+	text-align: center;
+	
+}
+
+.pageClazz {
+	font-size: 13pt;
+	margin: 1pt;
+}
+
+
+</style>
+</html>

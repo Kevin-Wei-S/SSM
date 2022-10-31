@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<servers>
+  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Spring_MVC_Demo-config" deployDir="wtpwebapps" hostname="localhost" id="Spring_MVC_Demo" name="Spring_MVC_Demo" runtime-id="Spring_MVC" server-type="org.eclipse.jst.server.tomcat.85" server-type-id="org.eclipse.jst.server.tomcat.85" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="1">
+    <list key="modules" value0="Spring_MVC_Demo::org.eclipse.jst.jee.server:Spring_MVC_Demo::jst.web::2.5"/>
+  </server>
+  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Spring_MVC_Ajax-config" deployDir="wtpwebapps" hostname="localhost" id="Spring_MVC_Ajax" name="Spring_MVC_Ajax" runtime-id="Spring_MVC" server-type="org.eclipse.jst.server.tomcat.85" server-type-id="org.eclipse.jst.server.tomcat.85" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="1">
+    <list key="modules" value0="Spring_MVC_Ajax::org.eclipse.jst.jee.server:Spring_MVC_Ajax::jst.web::2.5"/>
+  </server>
+  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Spring_MVC_Extension-config" deployDir="wtpwebapps" hostname="localhost" id="Spring_MVC_Extension" name="Spring_MVC_Extension" runtime-id="Spring_MVC" server-type="org.eclipse.jst.server.tomcat.85" server-type-id="org.eclipse.jst.server.tomcat.85" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="1">
+    <list key="modules" value0="Spring_MVC_Extension::org.eclipse.jst.jee.server:Spring_MVC_Extension::jst.web::2.5"/>
+  </server>
+  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Spring_MVC_Annotation-config" deployDir="wtpwebapps" hostname="localhost" id="Spring_MVC_Annotation" name="Spring_MVC_Annotation" runtime-id="Spring_MVC" server-type="org.eclipse.jst.server.tomcat.85" server-type-id="org.eclipse.jst.server.tomcat.85" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="1">
+    <list key="modules" value0="Spring_MVC_Annotation::org.eclipse.jst.jee.server:Spring_MVC_Annotation::jst.web::2.5"/>
+  </server>
+  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Spring_Integration_Listener-config" deployDir="wtpwebapps" hostname="localhost" id="Spring_Integration_Listener" name="Spring_Integration_Listener" runtime-id="Spring_MVC" server-type="org.eclipse.jst.server.tomcat.85" server-type-id="org.eclipse.jst.server.tomcat.85" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="1">
+    <list key="modules" value0="Spring_Integration_Listener::org.eclipse.jst.jee.server:Spring_Integration_Listener::jst.web::2.5"/>
+  </server>
+  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/SSM-config" deployDir="wtpwebapps" hostname="localhost" id="SSM" name="SSM" runtime-id="SSM" server-type="org.eclipse.jst.server.tomcat.85" server-type-id="org.eclipse.jst.server.tomcat.85" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="1">
+    <list key="modules" value0="SSM::org.eclipse.jst.jee.server:SSM::jst.web::2.5"/>
+  </server>
+  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Spring_MVC_RESTful-config" deployDir="wtpwebapps" hostname="localhost" id="Spring_MVC_RESTful" name="Spring_MVC_RESTful" runtime-id="SSM" server-type="org.eclipse.jst.server.tomcat.85" server-type-id="org.eclipse.jst.server.tomcat.85" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="1">
+    <list key="modules" value0="Spring_MVC_RESTful::org.eclipse.jst.jee.server:Spring_MVC_RESTful::jst.web::2.5"/>
+  </server>
+</servers>

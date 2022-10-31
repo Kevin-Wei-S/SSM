@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	  
+	  <!-- bean標籤 屬性: scope = singleton(單例) / prototype(多例) -->
+	  <bean id="studentOne" class="com.kwei.spring.pojo.Student"></bean> 
+	  <!-- DI(Dependency Injection): 依賴注入 -->
+	  <!-- 
+	  		property: 通過成員變量的set方法進行賦值
+	  		name: 設置我們需要賦值的屬性名(和set方法有關)
+	  		value: 設置為屬性所賦的值
+	   -->
+	  <bean id="studentTwo" class="com.kwei.spring.pojo.Student">
+	  		<property name="sId" value="1001"></property>
+	  		<property name="sName" value="Tom"></property>
+	  		<property name="age" value="20"></property>
+	  		<property name="gender" value="M"></property>
+	  </bean> 
+	  <!-- <bean id="teacher" class="com.kwei.spring.pojo.Teacher"></bean> -->
+	  
+	  <bean id="studentThree" class="com.kwei.spring.pojo.Student">
+	  		<constructor-arg name="sId" value="2002"></constructor-arg>
+	  		<constructor-arg name="sName" value="Cruise"></constructor-arg>
+	  		<constructor-arg name="score" value="22"></constructor-arg>
+	  		<!-- <constructor-arg value="M"></constructor-arg>
+	  		<constructor-arg value="99"></constructor-arg> -->
+	  </bean>
+	  
+	  <bean id="studentFour" class="com.kwei.spring.pojo.Student">
+	  		<property name="sId" value="1001"></property>
+	  		<!-- M1 -->
+	  		<!-- <property name="sName" value="&lt;Boss&gt;"></property> -->
+	  		<!-- M2 -->
+	  		<property name="sName">
+	  			<value><![CDATA[<Bozz>]]> </value>
+	  		</property>
+	  		<property name="age" value="35"></property>
+	  		<!-- 將屬性gender賦值為null -->
+	  		<property name="gender">
+	  			<null/>
+	  		</property>
+	  </bean>
+	  
+	  <bean id="studentFive" class="com.kwei.spring.pojo.Student">
+	  		<property name="sId" value="1002"></property>
+	  		<property name="sName" value="Sky"></property>
+	  		<property name="age" value="20"></property>
+	  		<property name="gender" value="M"></property>
+	  		<property name="score" value="100"></property>
+	  		
+	  		<!-- M1: 外部引用bean, ref: 引用IOC容器中的指定bean的id  -->
+	  		<!-- <property name="clazz" ref="clazzOne"></property> -->
+	  		
+	  		<!-- M2: 級聯方式 -->
+	  		<!-- <property name="clazz" ref="clazzTwo"></property>
+	  		<property name="clazz.cId" value="EE4001"></property>
+	  		<property name="clazz.cName" value="Eletrical_Engineering"></property> -->
+	  		
+	  		<!-- M3: 內部Bean -->
+	  		<property name="clazz">
+	  			<!-- 內部Bean為clazz屬性賦值 -->
+	  			<bean id="innerClazz" class="com.kwei.spring.pojo.Clazz">
+	  				<property name="cId" value="BD0000"></property>
+	  				<property name="cName" value="Buddha"></property>
+	  			</bean>
+	  		</property>
+	  </bean>
+	  
+	  <bean id="studentSix" class="com.kwei.spring.pojo.Student">
+	  	<property name="sId" value="3003"></property>
+	  	<property name="sName" value="Harvest"></property>
+	  	<property name="hobby">
+	  		<array>
+	  			<!-- 字面量 -->
+	  			<!-- <value>think</value>
+	  			<value>sleep</value>
+	  			<value>read</value>
+	  			<value>exercise</value>
+	  			<value>observe</value>
+	  			<value>meditate</value>
+	  			<value>Amitofo</value> -->
+	  			
+	  			<!-- 引用類型: ref -->
+	  			<bean class="java.lang.String">
+	  				<constructor-arg name="original" value="think"></constructor-arg>
+	  			</bean>
+	  			<bean class="java.lang.String">
+	  				<constructor-arg name="original" value="sleep"></constructor-arg>
+	  			</bean>
+	  			<bean class="java.lang.String">
+	  				<constructor-arg name="original" value="read"></constructor-arg>
+	  			</bean>
+	  			<bean class="java.lang.String">
+	  				<constructor-arg name="original" value="exercise"></constructor-arg>
+	  			</bean>
+	  			<bean class="java.lang.String">
+	  				<constructor-arg name="original" value="observe"></constructor-arg>
+	  			</bean>
+	  			<bean class="java.lang.String">
+	  				<constructor-arg name="original" value="meditate"></constructor-arg>
+	  			</bean>
+	  			<bean class="java.lang.String">
+	  				<constructor-arg name="original" value="Amitofo"></constructor-arg>
+	  			</bean>
+	  		</array>
+	  	</property>
+	  
+	  </bean>
+	  
+	  <!-- <bean id="clazzOne" class="com.kwei.spring.pojo.Clazz">
+	  		<property name="cId" value="CS1001"></property>
+	  		<property name="cName" value="Computer_Science"></property>
+	  </bean> -->
+	  
+	  <!-- <bean id="clazzTwo" class="com.kwei.spring.pojo.Clazz"></bean> -->
+	  
+	  <!-- <bean id="str" class="java.lang.String"></bean> -->
+	  
+	  <bean id="clazzThree" class="com.kwei.spring.pojo.Clazz">
+	  		<property name="students" ref="studentList">
+	  			<!-- M1: 內部的List集合(已存在的元素賦值) -->
+	  			<!-- <list>
+	  				<ref bean="studentOne"></ref>
+	  				<ref bean="studentTwo"></ref>
+	  				<ref bean="studentThree"></ref>
+	  				<ref bean="studentFour"></ref>
+	  				<ref bean="studentFive"></ref>
+	  				<ref bean="studentSix"></ref>
+	  			</list> -->
+	  			
+	  			<!-- M2: 引用Bean且賦值 -->
+	  			<!-- <list>
+					<bean class="com.kwei.spring.pojo.Student">
+						<property name="sId" value="101"></property>
+						<property name="sName" value="李逍遙"></property>
+						<property name="age" value="18"></property>
+					</bean>		
+					<bean class="com.kwei.spring.pojo.Student">
+						<property name="sId" value="202"></property>
+						<property name="sName" value="李天柱"></property>
+						<property name="age" value="65"></property>
+					</bean>		
+					<bean class="com.kwei.spring.pojo.Student">
+						<property name="sId" value="303"></property>
+						<property name="sName" value="李方晴"></property>
+						<property name="age" value="26"></property>
+					</bean>		
+					<bean class="com.kwei.spring.pojo.Student">
+						<property name="sId" value="404"></property>
+						<property name="sName" value="李世民"></property>
+						<property name="age" value="40"></property>
+					</bean>		
+					<bean class="com.kwei.spring.pojo.Student">
+						<property name="sId" value="505"></property>
+						<property name="sName" value="李聃"></property>
+						<property name="age" value=""></property>
+					</bean>		
+					<bean class="com.kwei.spring.pojo.Student">
+						<property name="sId" value="606"></property>
+						<property name="sName" value="李尋歡"></property>
+						<property name="age" value=""></property>
+					</bean>		
+	  			</list> -->
+	  			
+	  			<!-- M3: <util:list id="..."> -->
+	  			<!-- <property name="students" 加上: ref="studentList"> -->
+	  			
+	  		</property>
+	  </bean>
+	  
+	  <!-- Bean_Map_DI -->
+	  <bean id="studentWithProfessorMap" class="com.kwei.spring.pojo.Student">
+	  		<property name="sId" value="1001"></property>
+	  		<property name="sName" value="Tom"></property>
+	  		<property name="professorMap" ref="stuWithProMap">
+	  			<!-- M1: proMap -->
+	  			<!-- <map>
+	  				<entry key="10001" value-ref="professorOne"></entry>
+	  				<entry key="10002" value-ref="professorTwo"></entry>
+	  			</map> -->
+	  		</property>
+	  </bean>
+	  
+	  <bean id="professorOne" class="com.kwei.spring.pojo.Professor">
+	  		<property name="pId" value="10001"></property>
+	  		<property name="pName" value="KP"></property>
+	  </bean>
+	  
+	  <bean id="professorTwo" class="com.kwei.spring.pojo.Professor">
+	  		<property name="pId" value="10002"></property>
+	  		<property name="pName" value="SP"></property>
+	  </bean>
+	  
+	  <!-- 配置一個集合類型的Bean, 需要使用util的約束 -->	
+	  <!-- util為前綴, 避免list標籤重名, 引用錯誤. -->			
+	  <util:list id="studentList">
+	  		<ref bean="studentOne"></ref>
+	  		<ref bean="studentTwo"></ref>
+	  		<ref bean="studentThree"></ref>
+	  		<ref bean="studentFour"></ref>
+	  		<ref bean="studentFive"></ref>
+	  		<ref bean="studentSix"></ref>
+	  </util:list>
+	  
+	  <!-- M2: proMap -->
+	  <util:map id="stuWithProMap">
+	 		<entry key="10001" value-ref="professorOne"></entry>
+	 		<entry key="10002" value-ref="professorTwo"></entry>
+	  </util:map>
+	  
+	  <!-- p約束 -->
+	  <bean id="studentSeven" class="com.kwei.spring.pojo.Student"
+	  		p:sId="10010" p:sName="home" 
+	  		p:professorMap-ref="stuWithProMap">
+	  </bean>
+</beans>

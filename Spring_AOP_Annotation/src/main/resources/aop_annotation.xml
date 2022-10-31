@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	   					   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+	
+	<!-- 
+		AOP的注意事項:
+			1. 切面類和目標類都需要交給IOC容器管理 
+			2. 切面類必須通過@Aspect註解標示為一個切面
+			3. 在Spring的配置文件中設置<aop:aspectj-autoproxy /> 開啟基於註解的AOP 
+	-->
+	
+	<context:component-scan base-package="com.kwei.spring.aop.annotation"></context:component-scan>
+	
+	<!-- 開啟基於註解的AOP -->
+	<aop:aspectj-autoproxy />
+	
+</beans>

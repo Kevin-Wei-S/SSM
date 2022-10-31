@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	  
+	  <!-- 
+			bean的作用域:
+				scope屬性(預設為singleton):
+					singleton: 單例模式
+					prototype: 多例模式
+					request: 在一個請求的範圍內有效
+					session: 在一個會話的範圍內有效
+	   -->
+	  <bean id="student" class="com.kwei.spring.pojo.Student" scope="prototype"> 
+	  		<property name="sId" value="1001"></property>
+	  		<property name="sName" value="Sky"></property>
+	  </bean>
+	 
+</beans>

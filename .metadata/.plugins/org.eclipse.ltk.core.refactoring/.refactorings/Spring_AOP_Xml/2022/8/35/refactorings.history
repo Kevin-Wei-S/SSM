@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Spring_AOP_Xml/src/main/resources/aop_annotation.xml&apos; to &apos;aop_xml.xml&apos;" description="Rename resource &apos;aop_annotation.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/aop_annotation.xml" name="aop_xml.xml" stamp="1661415865814" updateReferences="true"/>
+</session>

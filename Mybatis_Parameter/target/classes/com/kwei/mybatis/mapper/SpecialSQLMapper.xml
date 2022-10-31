@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kwei.mybatis.mapper.SpecialSQLMapper">
+	<!-- List<User> getUserByLike(String likeStr) -->
+	<select id="getUserByLike" resultType="User">
+		<!-- M1: -->
+		<!-- select * from t_user where username like '%${likeStr}%' -->
+		<!-- M2: -->
+		<!-- select * from t_user where username like concat('%', #{likeStr}, '%') -->
+		<!-- M3: -->
+		select * from t_user where username like "%"#{likeStr}"%"
+	</select>
+	
+	<!-- void deleteMoreUser(@Param("ids")String ids) -->
+	<delete id="deleteMoreUser">
+		delete from t_user where id in (${ids})
+	</delete>
+	
+	<!-- List<User> getUserList(@Param("tableName")String tableName) -->
+	<select id="getUserList" resultType="User">
+		select * from ${tableName}
+	</select>
+	
+	<!-- void insertUser(User user) -->
+	<!-- 
+		獲取自增主鍵:
+			useGeneratedKeys: 表示當前添加功能使用自增的主鍵
+			keyProperty: 將添加數據的自增主鍵為實體類類型參數的id屬性賦值
+				補充: 返回值為受影響列數, 因此無法藉由返回值獲取自增主鍵.
+					  故只能應用實體類的參數作為自增主鍵的載體.
+	 -->
+	<insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+		insert into t_user values(null, #{username}, #{password}, #{age}, 
+									#{gender}, #{email})
+	</insert>
+	
+</mapper>

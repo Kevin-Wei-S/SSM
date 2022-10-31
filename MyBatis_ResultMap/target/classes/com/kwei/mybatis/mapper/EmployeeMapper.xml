@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kwei.mybatis.mapper.EmployeeMapper">
+
+	<!-- 
+		Column名與屬性名不一致的情況下, 如何來處理映射關係: 
+			1. 為查詢的Column名, 設置別名, 如此可與屬性名保持一致. 
+			2. 當Column滿足MySQL要求使用"_", 而屬性使用駝峰是命名 此時可以在MyBatis的核心配置文件中來設置一個全局配置, 可以自動將"_"映射為駝峰式命名. 
+		       EX: emp_id:empId, emp_name:empName 
+		    3. 使用resultMap(自定義映射)來實現 
+		       
+		       x. 處理多對一的映射關係:
+		       		1. 級聯方式處理 
+		       		2. association
+		       		3. 分步查詢
+		       y. 處理一對多的映射關係:
+		       		1. collection
+		       		2. 分步查詢
+	-->
+
+	<!-- Employee getEmployeeByEmpId(@Param("empId")Integer empId); -->
+	<!-- <select id="getEmployeeByEmpId" resultType="Employee"> M1: select emp_id 
+		empId, emp_name empName, age, gender from t_emp where emp_id = #{empId} M2: 
+		select * from t_emp where emp_id = #{empId} </select> -->
+	<!-- 
+		resultMap: 設置自定義的映射關係 
+			id: 唯一標識
+			type: 處理映射關係的實體類的類型
+			常用的標籤:
+				id: 處理主鍵及實體類中屬性的映射關係
+				result: 處理非主鍵(一般Column)及實體類中屬性的映射關係
+				column: 設置映射關係中的Column名, 
+						必須是SQL查詢中的某個Column(有可能查詢時用了別名)
+				property: 設置映射關係中的實體類的屬性名
+				association: 處理多對一的映射關係(處理實體類類型的屬性)
+				collection: 處理一對多的映射關係(處理集合類型的屬性)
+	-->
+	<resultMap id="empResultMap" type="Employee">
+		<id column="emp_id" property="empId" />
+		<result column="emp_name" property="empName" />
+	</resultMap> 
+
+	<select id="getEmployeeByEmpId" resultMap="empResultMap">
+		select * from t_emp
+		where emp_id = #{empId}
+	</select>
+	
+	<resultMap id="empAndDeptResultMap_one" type="Employee">
+		<id column="emp_id"  property="empId" />
+		<result column="emp_name" property="empName" />
+		<result column="age" property="age" />
+		<result column="gender" property="gender" />
+		<result column="dept_id" property="dept.deptId" />
+		<result column="dept_name" property="dept.deptName" />
+	</resultMap>
+	
+	<resultMap id="empAndDeptResultMap" type="Employee">
+		<id column="emp_id" property="empId" />
+		<result column="emp_name" property="empName" />
+		<result column="age" property="age" />
+		<result column="gender" property="gender" />
+		<association property="dept" javaType="Department">
+			<id column="dept_id" property="deptId" />
+			<result column="dept_name" property="deptName" />
+		</association>
+	</resultMap>
+	
+	<!-- Employee getEmployeeAndDepartmentByEmpId(@Param("empId") Integer empId); -->
+	<select id="getEmployeeAndDepartmentByEmpId" resultMap="empAndDeptResultMap">
+		select 
+		e.*, d.dept_name 
+		from t_emp e 
+		left join t_dept d 
+		on e.dept_id = d.dept_id 
+		where e.emp_id = #{empId}
+	</select>
+
+	<resultMap id="empAndDeptByStepOneResultMap" type="Employee">
+		<id column="emp_id" property="empId" />
+		<result column="emp_name" property="empName" />
+		<result column="age" property="age" />
+		<result column="gender" property="gender" />
+		<!-- 
+			property: 根據第一組SQL查詢出的column,
+					  作為select(即第二張表的第二組SQL)
+					  查詢出的dept返回值
+		 -->
+		<association property="dept" 
+					   select="com.kwei.mybatis.mapper.DepartmentMapper.getEmployeeAndDepartmentByStepTwo" 
+					   column="dept_id" 
+					   fetchType="lazy" />
+		<!-- fetchType: 設置當前的分步查詢為立即加載(eager)或延遲加載(lazy) -->		
+	</resultMap>
+	<!-- Employee getEmployeeAndDepartmentByStepOne(@Param("empId")Integer empId); -->
+	<select id="getEmployeeAndDepartmentByStepOne" resultMap="empAndDeptByStepOneResultMap">
+		select 
+		* 
+		from t_emp
+		where emp_id = #{empId}
+	</select>
+	
+	<resultMap id="deptAndEmpByStepTwo" type="Employee">
+		<id column="emp_id" property="empId" />
+		<result column="emp_name" property="empName" />
+		<result column="age" property="age" />
+		<result column="gender" property="gender" />
+		<association property="dept" 
+					 select="com.kwei.mybatis.mapper.DepartmentMapper.getDeptAndEmpByStepOne_One"
+					 column="dept_id" />
+	</resultMap>
+	<!-- Employee getDeptAndEmpByStepTwo(@Param("deptId")Integer deptId); -->
+	<select id="getDeptAndEmpByStepTwo" resultMap="deptAndEmpByStepTwo">
+		select * from t_emp where dept_id = #{deptId}	
+	</select>
+	
+	<!-- List<Employee> getDeptAndEmpByStepTwoByTeacher(@Param("deptId")Integer deptId); -->
+	<select id="getDeptAndEmpByStepTwoByTeacher" resultType="Employee">
+		select * from t_emp where dept_id = #{deptId}
+	</select>
+
+</mapper>

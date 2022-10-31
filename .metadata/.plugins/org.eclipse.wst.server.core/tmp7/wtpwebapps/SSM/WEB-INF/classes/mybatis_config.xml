@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+		<!-- 將SQL"_"命名方式映射為Java駝峰命名方式 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!-- 開啟延遲加載 -->
+		<setting name="lazyLoadingEnabled" value="true" />
+		<!-- false: 按需加載, true: 完整加載 -->
+		<setting name="aggressiveLazyLoading" value="false" />
+	</settings>
+	<plugins>
+		<!-- 配置分頁插件 -->
+		<plugin	interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+	</plugins>
+
+</configuration>

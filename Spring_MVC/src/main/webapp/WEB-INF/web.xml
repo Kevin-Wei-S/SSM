@@ -1,0 +1,30 @@
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://JAVA.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>Spring_MVC</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- 配置SpringMVC的前端控制器DispatcherServlet SpringMVC的配置文件默認的位置和名稱: 位置: WEB-INF下 
+		名稱: <servlet-name>標籤的值 + -servlet.xml 當前配置下的配置文件名稱: SpringMVC-servlet.xml -->
+	<servlet>
+		<servlet-name>SpringMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<!-- <load-on-startup>1</load-on-startup> -->
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpringMVC</servlet-name>
+		<!-- /: 匹配瀏覽器向服務器發送的所有請求(除了.jsp外) /*: 匹配瀏覽器向服務器發送的所有請求(包含.jsp) *.do: 後綴匹配 
+			注意: 為何不能寫/*: 因為.jsp檔必須由Tomcat的org.apache.jasper.servlet.JspServlet處理, 如果我們用/*, 
+			jsp會由DispatcherServlet來處理, 然而DispatcherServlet, 並沒有處理jsp的相關代碼. -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+</web-app>

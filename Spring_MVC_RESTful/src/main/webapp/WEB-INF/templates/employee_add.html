@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>AddEmp</title>
+</head>
+<body>
+	<div align="center">
+		<form th:action="@{/employee}" method="post">
+			<table border="1">
+				<tr>
+					<th colspan="2">Employee-Add</th>
+				</tr>
+				<tr>
+					<td>Last-Name:</td>
+					<td><input type="text" name="lastName"></td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td> <input type="text" name="email"></td>
+				</tr>
+				<tr>
+					<td>Gender:</td>
+					<td>
+						<input type="radio" id="M" name="gender" value="1">
+						<label for="M">男</label>
+						<input type="radio" id="F" name="gender" value="0">
+						<label for="F">女</label>
+						<input type="radio" id="E" name="gender" value="2">
+						<label for="E">保密</label>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit" value="Add"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+<style>
+	th, td{
+		font-weight: bolder;
+		text-align: center;
+	}
+	th {
+		font-size: 16pt;
+	}
+	td {
+		font-size: 14pt;
+	}
+</style>
+</html>

@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.kwei.spring</groupId>
+  <artifactId>Spring_Transaction</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  
+  <dependencies>
+  
+  	<!-- 基於Maven依賴的特性, 導入spring-context依賴即可導入當前所有jar包 -->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-context</artifactId>
+  		<version>5.3.1</version>
+   	</dependency>
+   
+   	<!-- Spring 持久化層支持jar包 -->
+   	<!-- Spring 在執行持久化層操作、與持久化層技術進行整合過程中, 需要使用-->
+   	<!-- orm、jdbc、tx三個jar包-->
+   	<!-- 導入 orm 包就可以通過Maven依賴傳遞性 把其他兩個也導入 -->
+   	<!-- Object-Relation-Mapping -->
+   	<dependency>
+   		<groupId>org.springframework</groupId>
+   		<artifactId>spring-orm</artifactId>
+   		<version>5.3.1</version>
+   	</dependency>
+   	
+   	<!-- Spring 測試相關 -->
+   	<dependency>
+   		<groupId>org.springframework</groupId>
+   		<artifactId>spring-test</artifactId>
+   		<version>5.3.1</version>
+   	</dependency>
+   
+    <!-- junit測試 -->
+    <dependency>
+   		<groupId>junit</groupId>
+   		<artifactId>junit</artifactId>
+   		<version>4.12</version>
+    </dependency>
+   
+    <!-- MySQL驅動 -->
+    <dependency>
+   		<groupId>mysql</groupId>
+   		<artifactId>mysql-connector-java</artifactId>
+   		<version>8.0.16</version>
+    </dependency>
+  
+    <!-- 數據源 -->
+    <dependency>
+    	<groupId>com.alibaba</groupId>
+    	<artifactId>druid</artifactId>
+    	<version>1.0.31</version>
+    </dependency>
+    
+   </dependencies>
+   
+</project>

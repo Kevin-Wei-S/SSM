@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Employee_List</title>
+</head>
+<body>
+	<div id="app" align="center">
+		<table border="1">
+			<tr>
+				<th colspan="5">Employee_List</th>
+			</tr>
+			<tr>
+				<th>id</th>
+				<th>lastName</th>
+				<th>email</th>
+				<th>gender</th>
+				<th><a th:href="@{/employee/add}">To-Add</a></th>
+			</tr>
+			<tr th:each="emp : ${emps}">
+				<td th:text="${emp.id}"></td>
+				<td th:text="${emp.lastName}"></td>
+				<td th:text="${emp.email}"></td>
+				<td th:text="${emp.gender}"></td>
+				<td>
+					<a th:href="@{'/employee/update/' + ${emp.id}}">Update</a>
+					<!-- M1-RESTful-Delete -->
+					<a th:href="@{'/employee/delete/' + ${emp.id}}">Delete</a>
+					<!-- M2-RESTful-Delete: 補充  -->
+					<a @click="deleteEmployee()" th:href="@{'/employee/' + ${emp.id}}">DeleteWithHref</a>
+				</td>
+			</tr>
+		</table>
+		<!-- M2-RESTful-Delete: Form -->
+		<form method="post">
+			<input type="hidden" name="_method" value="delete">
+		</form>
+	</div>
+	
+</body>
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+<script type="text/javascript">
+	var vue = new Vue({
+		el:"#app",
+		methods:{
+			deleteEmployee(){
+				// 獲取form表單
+				var form = document.getElementsByTagName("form")[0];
+				// 將超連結的href的屬性值賦值給form表單的action屬性
+				// event.target: 當前觸發事件的標籤
+				form.action = event.target.href;
+				var id = event.target.parentNode.parentNode.firstChild.innerText;
+				// 確認刪除對話框
+				if(confirm("確定要刪除id: " + id + "的員工嗎?")){
+					// 表單提交
+					form.submit();
+				}
+				// 阻止超連結的默認行為
+				event.preventDefault();
+			}
+		}
+	});
+</script>
+
+<style>
+	td, th{
+		text-align: center;
+		font-weight: bolder;
+		
+	}
+	td {
+		font-size: 14pt;
+	}
+	th{
+		font-size: 16pt;
+	}
+</style>
+</html>

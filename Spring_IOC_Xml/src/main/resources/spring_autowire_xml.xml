@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="userControlller" class="com.kwei.spring.controller.UserController" autowire="byType">
+		<!-- <property name="userService" ref="userServiceImpl"></property> -->
+	</bean>
+	
+	<bean id="userServiceImpl" class="com.kwei.spring.service.Impl.UserServiceImpl" autowire="byType">
+		<!-- <property name="userDao" ref="userDaoImpl"></property> -->
+	</bean>
+	
+	<bean id="userDaoImpl" class="com.kwei.spring.dao.impl.UserDaoImpl"></bean>
+	
+	
+</beans>

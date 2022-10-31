@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	   
+	   <!-- 
+	   		bean: 配置一個bean對象, 且將對象交給IOC(Inversion of Control)管理.
+	   			屬性:
+	   				id: bean的唯一標識, 不可重複.
+	   				class: 設置bean對象所對應的類型的全類名
+	    -->
+	  <bean id="amitofo" class="com.kwei.spring.pojo.Amitofo">
+	  	
+	  </bean>
+	  
+	  
+	   					   
+</beans>

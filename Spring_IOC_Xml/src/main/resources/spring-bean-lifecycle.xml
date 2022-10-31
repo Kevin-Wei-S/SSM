@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	  
+	  <bean id="user" class="com.kwei.spring.pojo.User" init-method="init" 
+	  	    											destroy-method="destroy">
+	  		<property name="id" value="5501"></property>
+	  		<property name="username" value="Sky"></property>
+	  		<property name="password" value="root"></property>
+	  		<property name="age" value="16"></property>
+	  </bean>
+	  
+	  <!-- 將作用於每一個Bean -->
+	  <bean id="myBeanPostProcessor" class="com.kwei.spring.process.MyBeanProcessor"></bean>
+	  
+	  <!-- <bean id="student" class="com.kwei.spring.pojo.Student"></bean> -->
+	  
+</beans>

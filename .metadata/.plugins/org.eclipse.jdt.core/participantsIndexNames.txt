@@ -1,0 +1,5 @@
+INDEX VERSION 1.131
+D:\workspace\SSM\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3253522775.index
+\Spring_MVC\src\main\resources
+D:\workspace\SSM\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2821403761.index
+\Spring_MVC_HelloWorld\src\main\resources

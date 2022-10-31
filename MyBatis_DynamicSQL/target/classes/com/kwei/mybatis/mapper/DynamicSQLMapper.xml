@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kwei.mybatis.mapper.DynamicSQLMapper">
+
+	<!-- 
+		動態SQL: 
+			1. if標籤: 通過test屬性中的表達式判斷標籤中的內容是否為true, 
+			           如為true, 則執行if內的代碼. 
+			
+			2. where標籤: 
+				2.1. 如果where標籤內if標籤內容成立, 則自動生成where 
+				2.2. where後第一個條件判斷如果有and會自動刪除 
+					 (條件前and, 無法刪除條件後and) 
+				2.3. 如果where標籤內的if標籤內容皆不成立, 則不生成where. 
+			
+			3. trim標籤: 
+				3.1. prefix: 在前面添加指定內容 
+				3.2. suffix: 在後面添加指定內容 
+				3.3. prefixOverrides: 在前面刪除指定內容 
+				3.4. suffixOverrides: 在後面刪除指定內容 
+			
+			4. choose-when-otherwise標籤組: 
+				相當於Java中的if - else if - else
+				而when既是if也是else if, 而otherwise為else,s
+				且如果為嵌套if, 每一嵌套if外必需有choose包覆.
+			
+			5. foreach標籤:
+				5.1. collection: 需遍歷的數組或集合
+				5.2. item: 數組或集合內的元素(自定義變量)
+				5.3. separator: 元素間的分隔符
+				5.4. open: foreach標籤包起來的前面添加內容(僅執行一次)
+				5.5. close: foreach標籤包起來的後面添加內容(只執行一次)
+				5.6. index: 從index指定的數值開始遍歷
+				
+			6. sql標籤: 可以紀錄SQL片段以利重複使用
+			
+						<sql id="empColumns">
+							emp_id, emp_name, age, gender, dept_id
+						</sql>
+						
+						<select id="...">
+							select <include refid="empColumns" /> from t_emp
+						</select>
+						
+	-->
+
+	<sql id="empColumns">
+		emp_id, emp_name, age, gender, dept_id
+	</sql>
+
+	<!-- List<Emp> getEmpByConditions(@Param("emp")Emp emp); -->
+	<select id="getEmpByConditions_one" resultType="Emp">
+		select <include refid="empColumns" /> from t_emp where 1
+		<if test="empName != null and !''.equals(empName)">
+			emp_name = #{empName}
+		</if>
+		<if test="age != null and !''.equals(age)">
+			and age <![CDATA[<]]>
+			#{age}
+		</if>
+		<if test="gender != null and !''.equals(gender)">
+			and gender =
+			#{gender}
+		</if>
+	</select>
+
+	<select id="getEmpByConditions_two" resultType="Emp">
+		select * from t_emp
+		<where>
+			<if test="empName != null and !''.equals(empName)">
+				and emp_name = #{empName}
+			</if>
+			<if test="age != null and !''.equals(age)">
+				and age <![CDATA[<]]>
+				#{age}
+			</if>
+			<if test="gender != null and !''.equals(gender)">
+				and gender = #{gender}
+			</if>
+		</where>
+	</select>
+
+	<select id="getEmpByConditions" resultType="Emp">
+		select <include refid="empColumns"/> from t_emp
+		<trim prefix="where" suffixOverrides="and">
+			<if test="empName != null and !''.equals(empName)">
+				emp_name = #{ empName } and
+			</if>
+			<if test=" age != null and !''.equals(age)">
+				age <![CDATA[<]]>
+				#{age} and
+			</if>
+			<if test="gender != null and !''.equals(gender)">
+				gender = #{gender} and
+			</if>
+		</trim>
+	</select>
+
+	<!-- List<Emp> getEmpByChoose(Emp emp); -->
+	<select id="getEmpByChoose" resultType="Emp">
+		select * from t_emp
+		<where>
+			<choose>
+				<when test="gender != null and gender.equals(&quot;M&quot;)">
+					gender = #{gender} and age > #{age}
+				</when>
+				<when test="gender != null and gender.equals(&quot;F&quot;)">
+					gender = #{gender} and age <![CDATA[<]]> #{age}
+				</when>
+				<otherwise>
+					age = #{age}
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+
+	<!-- void insertMoreEmps(@Param("emps")List<Emp> emps); -->
+	<insert id="insertMoreEmps">
+		insert into t_emp values
+			<foreach collection="emps" item="emp" separator=",">
+				(null, #{emp.empName}, #{emp.age}, #{emp.gender}, null)
+			</foreach>
+	</insert>
+	
+	<!-- void deleteMoreEmpsByEmpIds(@Param("empIds") Integer[] empIds); -->
+	<delete id="deleteMoreEmpsByEmpIds_one">
+		delete from t_emp where 
+		<foreach collection="empIds" item="empId" separator="or">
+			emp_id = #{empId}
+		</foreach>
+	</delete>
+	
+	<delete id="deleteMoreEmpsByEmpIds">
+		delete from t_emp where emp_id in 
+		<foreach collection="empIds" item="empId" separator="," open="(" close=")">
+			#{empId}
+		</foreach>
+	</delete>
+
+</mapper>

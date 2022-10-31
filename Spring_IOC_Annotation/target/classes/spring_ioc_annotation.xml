@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- 
+		<context:exclude-filter>: 排除掃描
+		type: 排除掃描的方式
+			annotation: 根據標籤類型
+			assignable: 根據指定類型
+		<context:include-filter>:
+			use-default-filters="true": 除了com.kwei.spring包內所有註解, 再追加掃描.
+			use-default-filters="false": 在com.kwei.spring包內, 只掃描指定註解.
+		
+	 -->
+	
+	<!-- 掃描組件 -->      <!-- 此資料夾下的所有子資料夾 都會被掃描 -->
+	<context:component-scan base-package="com.kwei.spring">
+			<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:exclude-filter> -->
+			<!-- <context:exclude-filter type="assignable" expression="com.kwei.spring.dao.impl.UserDaoImpl"></context:exclude-filter> -->
+			
+			<!-- 只掃描指定標籤 需在component-scan設置use-default-filters屬性為false -->
+			<!-- <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:include-filter> -->
+			<!-- <context:include-filter type="assignable" expression="com.kwei.spring.pojo.IncludeService"></context:include-filter> -->
+	</context:component-scan>
+	
+	<!-- <bean id="userService" class="com.kwei.spring.service.impl.UserServiceImpl"></bean>
+	<bean id="userDao" class="com.kwei.spring.dao.impl.UserDaoImpl"></bean> -->
+	
+	<!-- <bean id="service" class="com.kwei.spring.service.impl.UserServiceImpl"></bean>
+	<bean id="dao" class="com.kwei.spring.dao.impl.UserDaoImpl"></bean> -->
+	
+</beans>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modules>
+  <module moduleId="org.eclipse.jst.jee.server:Spring_MVC_Annotation" serverId="Spring_MVC_Annotation"/>
+  <module moduleId="org.eclipse.jst.jee.server:SpringMVC_Server_Recovery" serverId="SpringMVC_Server_Recovery"/>
+  <module moduleId="org.eclipse.jst.jee.server:Spring_MVC" serverId="Spring_MVC"/>
+  <module moduleId="org.eclipse.jst.jee.server:Spring_MVC_Extension" serverId="Spring_MVC_Extension"/>
+  <module moduleId="org.eclipse.jst.jee.server:Spring_MVC_RESTful" serverId="Spring_MVC_RESTful"/>
+  <module moduleId="org.eclipse.jst.jee.server:SSM" serverId="SSM"/>
+  <module moduleId="org.eclipse.jst.jee.server:Spring_MVC_Demo" serverId="Spring_MVC_Demo"/>
+  <module moduleId="org.eclipse.jst.jee.server:Spring_MVC_HelloWorld" serverId="Spring_MVC_HelloWorld"/>
+  <module moduleId="org.eclipse.jst.jee.server:Spring_MVC_Ajax" serverId="Spring_MVC_Ajax"/>
+  <module moduleId="org.eclipse.jst.jee.server:Spring_Integration_Listener" serverId="Spring_Integration_Listener"/>
+</modules>

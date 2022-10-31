@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+</head>
+<body>
+	<div align="center">
+		<h1>道德經</h1>
+		<h2>道可道，非常道。</h2>
+		<a th:href="@{/silent}">測試@RequestMapping註解所標示的位置</a> <br>
+		<a th:href="@{/tranquil}">測試@RequestMapping註解的value</a>
+	</div>
+	<div align="center">
+		<form  th:action="@{/tranquil}" method="post">
+			<input type="submit" value="測試@RequestMapping註解的method屬性" />
+		</form>
+	</div>
+	<div align="center">
+		<a th:href="@{/tranquil?Buddha=Amitofo}">測試@RequestMapping註解的params</a> <br>
+		<a th:href="@{/tranquil(Buddha='Amitofo')}">測試@RequestMapping註解的params</a> <br>
+		<a th:href="@{/abc/test/ffd/dfsf/dsfsf}">測試@RequestMapping註解支持ant風格的路徑</a> <br>
+		<a th:href="@{/test/rest/1001/Tom/root}">測試@RequestMapping註解的value屬性中的佔位符</a> <br>
+	</div>
+	<hr>
+	<div align="center">
+		<h1>ServletAPI-Parameter</h1>
+		<form th:action="@{/param/servletAPI}" method="post">
+			username: <input type="text" name="username"> <br>
+			password: <input type="password" name="password"> <br>
+			<input type="submit" value="Login" />
+		</form>
+	</div>
+	<hr>
+	<div align="center">
+		<h1>SpringMVC-Parameter</h1>
+		<form th:action="@{/param/springMVC}" method="post">
+			username: <input type="text" name="userName"> <br>
+			password: <input type="password" name="password"> <br>
+			<input type="submit" value="Login" />
+		</form>
+	</div>
+	<hr>
+	<div align="center">
+		<h1>SpringMVC-Parameter-POJO</h1>
+		<form th:action="@{/param/springmvc/pojo}" method="post">
+			username: <input type="text" name="username"> <br>
+			password: <input type="password" name="password"> <br>
+			age: <input type="text" name="age">  <br>
+			gender: <input type="text" name="gender">  <br>
+			address: <input type="text" name="address">  <br>
+			phone: <input type="text" name="phone">  <br>
+			email: <input type="text" name="email">  <br>
+			<input type="submit" value="Login" />
+		</form>
+	</div>
+	<hr>
+	<div align="center">
+		<a th:href="@{/scope/mav}">測試通過ModelAndView向請求域共享數據</a>  <br>
+		<a th:href="@{/scope/model}">測試通過Model向請求域共享數據</a>  <br>
+		<a th:href="@{/scope/modelmap}">測試通過ModelMap向請求域共享數據</a>  <br>
+		<a th:href="@{/scope/map}">測試通過Map向請求域共享數據</a>  <br>
+		<a th:href="@{/scope/session}">測試通過ServletAPI向會話域共享數據</a>  <br>
+		<a th:href="@{/scope/application}">測試通過ServletAPI向應用域共享數據</a>
+	</div>
+	<hr>
+	<div align="center">
+		<a th:href="@{/view/thymeleaf}">測試SpringMVC的視圖ThymeleafView</a>  <br>
+		<a th:href="@{/view/forward}">測試SpringMVC的視圖InternalResourceView</a>  <br>
+		<a th:href="@{/view/redirect}">測試SpringMVC的視圖RedirectView</a>
+	</div>
+	
+</body>
+</html>

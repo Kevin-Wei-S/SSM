@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<publish-info>
+  <server id="Spring_MVC_Demo" path="publish1.dat"/>
+  <server id="Spring_MVC_Extension" path="publish4.dat"/>
+  <server id="Spring_MVC_RESTful" path="publish2.dat"/>
+  <server id="Spring_MVC_Annotation" path="publish5.dat"/>
+  <server id="SSM" path="publish7.dat"/>
+  <server id="Spring_MVC_Ajax" path="publish3.dat"/>
+  <server id="Spring_Integration_Listener" path="publish6.dat"/>
+</publish-info>
